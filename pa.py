@@ -33,13 +33,22 @@ def test_one_page(url):
     for house in div.find_all('div', attrs={'class': 'nlc_details'}):
         # 根据class="text1"获取存储楼盘标题的div
         titleDiv = house.find('div', attrs={'class': 'nlcd_name'})
+        test_one_title(titleDiv.find('a')['href'])
         title = titleDiv.find('a').get_text().strip()
+
         # 根据class="text2"获取存储楼盘价格的地址
         addressDiv = house.find('div', attrs={'class': 'address'})
         address = addressDiv.find('a')['title']
         fang = title + "\t\t" + address
         print fang
         # price = priceDiv.find('b').text
+
+def test_one_title(url):
+    url ='%s%s'%('https:', url)
+    data = requests.get(url)
+    print url
+
+
 
 
 def assert_encoding(response):
